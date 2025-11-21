@@ -1,0 +1,39 @@
+﻿@using Dominio;
+@model List<TipoDeGasto>
+@{
+    ViewData["Title"] = "EliminarGasto";
+}
+
+<h1>EliminarGasto</h1>
+
+<table>
+    <thead>
+        <tr>
+            <td>Tipo de gasto</td>
+            <td>Eliminar</td>
+
+            
+        
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @foreach (TipoDeGasto tipo in Model)
+        {
+            <tr>
+                <td> @tipo.Nombre</td>
+                <td>
+                    <form asp-action="EliminarGasto" method="post">
+                        <input type="hidden" name="idTipoGasto" value="@tipo.Nombre" />
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+
+
+</table>

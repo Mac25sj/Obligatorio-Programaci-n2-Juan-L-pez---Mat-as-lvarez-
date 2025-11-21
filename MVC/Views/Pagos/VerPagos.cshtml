@@ -1,0 +1,43 @@
+﻿@using Dominio;
+@model List<Pago>
+
+@{
+    ViewData["Title"] = "VerPagos";
+}
+
+<h1>VerPagos</h1>
+
+
+
+<h1>Listar pagos</h1>
+<form action="/Pagos/VerPagos" method="post">
+    <input type="datetime" name="FechaBuscada" value="@DateTime.Now.ToShortDateString()" />
+    <input type="submit" value="Aplicar" class="btn btn-danger" />
+
+
+</form>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Nombre</td>
+            <td>Monto</td>
+
+        </tr>
+    </thead>
+    <tbody>
+
+
+
+        @foreach (Pago pago in Model)
+        {
+            <tr>
+                <td> @pago.NombreUsuario</td>
+                <td>@pago.Monto</td>
+            </tr>
+
+        }
+
+    </tbody>
+
+
+</table>

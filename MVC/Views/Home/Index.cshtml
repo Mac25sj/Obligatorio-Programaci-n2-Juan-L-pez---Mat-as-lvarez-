@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    var nombre = Context.Session.GetString("Nombre");
+    var rol = Context.Session.GetString("Rol");
+}
+
+
+
+<div class="text-center">
+    <h1 class="display-4">Obligatorio de Programación 2</h1>
+
+    @if (!string.IsNullOrEmpty(nombre) && !string.IsNullOrEmpty(rol))
+    {
+        <p>Bienvenido, <strong>@nombre</strong> (@rol)</p>
+
+        @if (rol == "Gerente")
+        {
+            <div>
+                <h2>Vista para Gerentes</h2>
+                <p>Accedé a reportes, gestión de equipo y estadísticas.</p>
+                <a class="btn btn-primary" asp-controller="Home" asp-action="">Ir al Panel de Gerente</a>
+            </div>
+        }
+        else if (rol == "Empleado")
+        {
+            <div>
+                <h2>Vista para Empleados</h2>
+                <p>Consultá tus pagos, actividades y perfil.</p>
+                <a class="btn btn-success" asp-controller="Home" asp-action="">Ir al Panel de Empleado</a>
+            </div>
+        }
+
+        <a class="btn btn-outline-danger mt-3" asp-controller="Login" asp-action="Logout">Cerrar sesión</a>
+    }
+    else
+    {
+        <p>No has iniciado sesión.</p>
+        <a class="btn btn-outline-primary" asp-controller="Login" asp-action="Login">Iniciar sesión</a>
+    }
+</div>

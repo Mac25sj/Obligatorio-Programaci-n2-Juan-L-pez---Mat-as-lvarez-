@@ -1,0 +1,49 @@
+﻿
+@using Dominio;
+@using static MVC.Controllers.VerPerfil;
+@model PerfilViewModel
+@{
+    ViewData["Title"] = "Perfiles";
+}
+
+
+<h1>Perfiles</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Rol</td>
+            <td>Nombre</td>
+            <td>Apellido</td>
+            <td>Email</td>
+            <td>Fecha de Incorporación:</td>
+            <td>Equipo:</td>
+            <td>Total de Gasto en el mes (Equipo):</td>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.usuario.Rol</td>
+            <td>@Model.usuario.Nombre</td>
+            <td>@Model.usuario.Apellido</td>
+            <td>@Model.usuario.Email</td>
+            <td>@Model.usuario.IncorporacionEmpresa</td>
+            <td>@Model.usuario.Pertenece</td>
+            <td>@Model.GastoEquipoMes</td>
+
+
+
+        </tr>
+        @foreach (Usuario u in Model.miCuadro)
+        {
+            <tr>
+                <td>@u.Rol</td>
+                <td>@u.Nombre</td>
+                <td>@u.Apellido</td>
+                <td>@u.Email</td>
+                <td>@u.IncorporacionEmpresa</td>
+                <td>@u.Pertenece</td>
+            </tr>
+        }
+    </tbody>
+

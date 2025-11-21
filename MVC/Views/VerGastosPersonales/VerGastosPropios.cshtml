@@ -1,0 +1,39 @@
+﻿@using Dominio;
+@model List<Pago>
+
+@{
+    ViewData["Title"] = "VerGastosPropios";
+}
+
+<h1>Ver Gastos Propios</h1>
+
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <td>Fechas de Pago</td>
+          <td>Monto</td>
+
+    </tr>
+    </thead>
+    <tbody>
+
+        
+
+        @foreach (Pago pago in Model)
+        {
+            
+            
+            if(pago.fechaDePago().Month == DateTime.Now.Month){
+            <tr>
+                <td> @pago.fechaDePago()</td>
+                <td>@pago.Monto</td>
+            </tr>
+        }
+        }
+    </tbody>
+        
+        
+     
+</table>
+

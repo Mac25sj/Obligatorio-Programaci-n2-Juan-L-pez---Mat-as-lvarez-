@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+<h1 class=" text-lg-start">Inicar Sesión</h1>
+<form action="Login" method="post"  >
+<input type="text" name="email" value="anafer@desarrollo" placeholder="Ingrese su Email"/>
+    <input type="password" name="contrasena" value="pass04" placeholder="Ingrese su Contraseña" />
+    <input type="submit" value="Iniciar Sesión" class="btn btn-danger" />
+</form>
+<h2>Datos de usuarios</h2>
+<p> Usuario>  </p>
+
+@ViewBag.Error
+
+
