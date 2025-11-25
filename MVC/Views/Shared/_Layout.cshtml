@@ -50,15 +50,15 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="CargarNuevoPago" asp-action="CargarUnPago">Cargar nuevo Pago</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Cerrar Sesión</a>
+                                <a class="btn btn-danger" asp-controller="Login" asp-action="Logout">
+                                    <i class="bi bi-box-arrow-left"></i> Cerrar sesión
+                                </a>
                             </li>
                         }
 
                         @if (Context.Session.GetString("Rol") == "Empleado")
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Cerrar Sesión</a>
-                            </li>
+                           
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="VerPerfil" asp-action="Perfiles">Ver Perfil</a>
                             </li>
@@ -67,6 +67,15 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="VerGastosPersonales" asp-action="VerGastosPropios">Ver Gastos Personales</a>
+                            </li>
+                            <li class="nav-item">
+                           <div> <a class="btn btn-danger" asp-controller="Login" asp-action="Logout">
+                                <i class="bi bi-box-arrow-left"></i> Cerrar sesión
+                                    </a>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Estás seguro de que deseas cerrar sesión?
+                                </div>
                             </li>
                         }
                     </ul>

@@ -27,7 +27,7 @@
             if(pago.fechaDePago().Month == DateTime.Now.Month){
             <tr>
                 <td> @pago.fechaDePago()</td>
-                <td>@pago.Monto</td>
+                    <td>@pago.Monto.ToString("N2")</td>    
             </tr>
         }
         }
