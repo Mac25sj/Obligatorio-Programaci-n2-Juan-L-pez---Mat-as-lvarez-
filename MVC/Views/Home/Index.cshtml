@@ -4,37 +4,68 @@
     var rol = Context.Session.GetString("Rol");
 }
 
-
-
-<div class="text-center">
-    <h1 class="display-4">Obligatorio de Programación 2</h1>
+<div class="text-center my-5">
+    <h1 class="display-4 fw-bold">Obligatorio de Programación 2</h1>
+    <p class="lead text-muted">Sistema de gestión de pagos y perfiles</p>
 
     @if (!string.IsNullOrEmpty(nombre) && !string.IsNullOrEmpty(rol))
     {
-        <p>Bienvenido, <strong>@nombre</strong> (@rol)</p>
+        <p class="mt-4">Bienvenido, <strong>@nombre</strong> <span class="badge bg-info">@rol</span></p>
 
         @if (rol == "Gerente")
         {
-            <div>
-                <h2>Vista para Gerentes</h2>
-                <p>Accedé a reportes, gestión de equipo y estadísticas.</p>
-                <a class="btn btn-primary" asp-controller="Home" asp-action="">Ir al Panel de Gerente</a>
+            <div class="card shadow-sm my-4">
+                <div class="card-body">
+                    <h2 class="card-title text-primary">Vista para Gerentes</h2>
+                    <p class="card-text">Accedé a reportes, gestión de equipo y estadísticas.</p>
+                    <a class="btn btn-primary" asp-controller="Home" asp-action="">
+                        <i class="bi bi-bar-chart"></i> Ir al Panel de Gerente
+                    </a>
+                </div>
             </div>
         }
         else if (rol == "Empleado")
         {
-            <div>
-                <h2>Vista para Empleados</h2>
-                <p>Consultá tus pagos, actividades y perfil.</p>
-                <a class="btn btn-success" asp-controller="Home" asp-action="">Ir al Panel de Empleado</a>
+            <div class="card shadow-sm my-4">
+                <div class="card-body">
+                    <h2 class="card-title text-success">Vista para Empleados</h2>
+                    <p class="card-text">Consultá tus pagos, actividades y perfil.</p>
+                    <a class="btn btn-success" asp-controller="Home" asp-action="">
+                        <i class="bi bi-person-check"></i> Ir al Panel de Empleado
+                    </a>
+                </div>
             </div>
         }
 
-        <a class="btn btn-outline-danger mt-3" asp-controller="Login" asp-action="Logout">Cerrar sesión</a>
+        <button type="button" class="btn btn-outline-danger mt-3" data-bs-toggle="modal" data-bs-target="#logoutModal">
+            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+        </button>
+
+        <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-light">
+                        <h5 class="modal-title" id="logoutModalLabel">Confirmar salida</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que deseas cerrar sesión?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <a class="btn btn-danger" asp-controller="Login" asp-action="Logout">
+                            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
     else
     {
-        <p>No has iniciado sesión.</p>
-        <a class="btn btn-outline-primary" asp-controller="Login" asp-action="Login">Iniciar sesión</a>
+        <p class="mt-4">No has iniciado sesión.</p>
+        <a class="btn btn-outline-primary" asp-controller="Login" asp-action="Login">
+            <i class="bi bi-box-arrow-in-right"></i> Iniciar sesión
+        </a>
     }
 </div>

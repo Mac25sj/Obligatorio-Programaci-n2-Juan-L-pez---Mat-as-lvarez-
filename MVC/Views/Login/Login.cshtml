@@ -1,16 +1,74 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Login";
 }
-<h1 class=" text-lg-start">Inicar Sesión</h1>
-<form action="Login" method="post"  >
-<input type="text" name="email" value="anafer@desarrollo" placeholder="Ingrese su Email"/>
-    <input type="password" name="contrasena" value="pass04" placeholder="Ingrese su Contraseña" />
-    <input type="submit" value="Iniciar Sesión" class="btn btn-danger" />
-</form>
-<h2>Datos de usuarios</h2>
-<p> Usuario>  </p>
 
-@ViewBag.Error
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h1 class="text-center mb-4">Iniciar Sesión</h1>
 
+                    <form action="Login" method="post">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo electrónico</label>
+                            <input type="text"
+                                   id="email"
+                                   name="email"
+                                   value="CarLóp@Ventas"
+                                   placeholder="Ingrese su Email"
+                                   class="form-control" />
+                        </div>
 
+                        <div class="mb-3">
+                            <label for="contrasena" class="form-label">Contraseña</label>
+                            <input type="password"
+                                   id="contrasena"
+                                   name="contrasena"
+                                   value="pass05"
+                                   placeholder="Ingrese su Contraseña"
+                                   class="form-control" />
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                Iniciar Sesión
+                            </button>
+                        </div>
+                    </form>
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger mt-3">
+                            @ViewBag.Error
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <h2 class="h5">Datos de usuarios</h2>
+                <p>Empleado: CarLóp@Ventas pass05</p>
+                <p>
+                    Gerente:
+                    JuaPér@Ventas  		 pass01
+                </p>
+                   
+                 <p>
+                    Gerente:
+                    AnaFer@Desarrollo  		 pass04
+                </p>
+                <p>
+                    Empleado:
+                    TomRey@Ventas           pass17
+                </p>
+
+                <p>
+                    Empleado:
+                    FedMol@RRHH           pass15
+                </p>
+      
+            </div>
+        </div>
+    </div>
+</div>

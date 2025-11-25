@@ -1,49 +1,58 @@
-﻿
-@using Dominio;
+﻿@using Dominio;
 @using static MVC.Controllers.VerPerfil;
 @model PerfilViewModel
+
 @{
     ViewData["Title"] = "Perfiles";
 }
 
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Perfiles</h1>
 
-<h1>Perfiles</h1>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <td>Rol</td>
-            <td>Nombre</td>
-            <td>Apellido</td>
-            <td>Email</td>
-            <td>Fecha de Incorporación:</td>
-            <td>Equipo:</td>
-            <td>Total de Gasto en el mes (Equipo):</td>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Rol</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Email</th>
+                            <th>Fecha de Incorporación</th>
+                            <th>Equipo</th>
+                            <th>Total de Gasto en el mes (Equipo)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-primary">
+                            <td>@Model.usuario.Rol</td>
+                            <td>@Model.usuario.Nombre</td>
+                            <td>@Model.usuario.Apellido</td>
+                            <td>@Model.usuario.Email</td>
+                            <td>@Model.usuario.IncorporacionEmpresa.ToShortDateString()</td>
+                            <td>@Model.usuario.Pertenece</td>
+                            <td>@Model.GastoEquipoMes</td>
+                        </tr>
 
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>@Model.usuario.Rol</td>
-            <td>@Model.usuario.Nombre</td>
-            <td>@Model.usuario.Apellido</td>
-            <td>@Model.usuario.Email</td>
-            <td>@Model.usuario.IncorporacionEmpresa</td>
-            <td>@Model.usuario.Pertenece</td>
-            <td>@Model.GastoEquipoMes</td>
-
-
-
-        </tr>
-        @foreach (Usuario u in Model.miCuadro)
-        {
-            <tr>
-                <td>@u.Rol</td>
-                <td>@u.Nombre</td>
-                <td>@u.Apellido</td>
-                <td>@u.Email</td>
-                <td>@u.IncorporacionEmpresa</td>
-                <td>@u.Pertenece</td>
-            </tr>
-        }
-    </tbody>
-
+                        @if (Model.usuario.Rol == rol.Gerente)
+                        {
+                            foreach (Usuario u in Model.miCuadro)
+                            {
+                                <tr>
+                                    <td>@u.Rol</td>
+                                    <td>@u.Nombre</td>
+                                    <td>@u.Apellido</td>
+                                    <td>@u.Email</td>
+                                    <td>@u.IncorporacionEmpresa.ToShortDateString()</td>
+                                    <td>@u.Pertenece</td>
+                                    <td>-</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -31,7 +31,7 @@ namespace Dominio
         private void validarTipoGasto()
         {
             if (Nombre == null || Descripcion == null)
-                throw new Exception("Faltan llenar campos");
+                throw new Exception("Faltan completar campos");
         }
     }
 }

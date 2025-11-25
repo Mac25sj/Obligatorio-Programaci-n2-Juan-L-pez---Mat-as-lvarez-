@@ -1,43 +1,68 @@
-﻿@using Dominio;
+﻿@using Dominio
 @model List<Pago>
 
 @{
-    ViewData["Title"] = "VerPagos";
+    ViewData["Title"] = "Ver Pagos";
 }
 
-<h1>VerPagos</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h1 class="text-center mb-4">Listado de Pagos</h1>
 
+                    <form asp-action="VerPagos" method="post" class="row g-3 mb-4">
+                        <div class="col-md-4">
+                            <label for="FechaBuscada" class="form-label">Filtrar por fecha</label>
+                            <input type="date"
+                                   id="FechaBuscada"
+                                   name="FechaBuscada"
+                                   value="@DateTime.Now.ToString("yyyy-MM-dd")"
+                                   class="form-control" />
+                        </div>
+                        <div class="col-md-2 align-self-end">
+                            <button type="submit" class="btn btn-primary w-100">
+                                Procesar
+                            </button>
+                        </div>
+                    </form>
 
+                    @if (Model != null)
+                    {
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">Usuario</th>
+                                    <th scope="col">Monto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (Pago pago in Model)
+                                {
+                                    <tr>
+                                        <td>@pago.NombreUsuario</td>
+                                        <td>$ @pago.Monto.ToString("N2")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info text-center">
+                            No se encontraron pagos para la fecha seleccionada.
+                        </div>
+                    }
 
-<h1>Listar pagos</h1>
-<form action="/Pagos/VerPagos" method="post">
-    <input type="datetime" name="FechaBuscada" value="@DateTime.Now.ToShortDateString()" />
-    <input type="submit" value="Aplicar" class="btn btn-danger" />
-
-
-</form>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <td>Nombre</td>
-            <td>Monto</td>
-
-        </tr>
-    </thead>
-    <tbody>
-
-
-
-        @foreach (Pago pago in Model)
-        {
-            <tr>
-                <td> @pago.NombreUsuario</td>
-                <td>@pago.Monto</td>
-            </tr>
-
-        }
-
-    </tbody>
-
-
-</table>
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger mt-3">
+                            @ViewBag.Error
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

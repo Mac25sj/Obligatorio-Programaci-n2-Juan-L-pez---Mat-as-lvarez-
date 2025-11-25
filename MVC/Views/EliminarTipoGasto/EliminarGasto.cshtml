@@ -1,39 +1,60 @@
-﻿@using Dominio;
+﻿@using Dominio
 @model List<TipoDeGasto>
+
 @{
-    ViewData["Title"] = "EliminarGasto";
+    ViewData["Title"] = "Eliminar Gasto";
 }
 
-<h1>EliminarGasto</h1>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Eliminar Tipo de Gasto</h1>
 
-<table>
-    <thead>
-        <tr>
-            <td>Tipo de gasto</td>
-            <td>Eliminar</td>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Tipo de gasto</th>
+                    <th scope="col" class="text-center">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (TipoDeGasto tipo in Model)
+                {
+                    <tr>
+                        <td>@tipo.Nombre</td>
+                        <td class="text-center">
+                            <form asp-action="EliminarGasto" method="post" class="d-inline eliminar-form">
+                                <input type="hidden" name="idTipoGasto" value="@tipo.Nombre" />
+                                <button type="submit" class="btn btn-danger btn-sm eliminar-btn">
+                                    <i class="bi bi-trash"></i> Eliminar
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-            
-        
-        </tr>
-    </thead>
-    <tbody>
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger mt-3">
+            @ViewBag.Error
+        </div>
+    }
+</div>
 
-
-        @foreach (TipoDeGasto tipo in Model)
-        {
-            <tr>
-                <td> @tipo.Nombre</td>
-                <td>
-                    <form asp-action="EliminarGasto" method="post">
-                        <input type="hidden" name="idTipoGasto" value="@tipo.Nombre" />
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form>
-                </td>
-            </tr>
+@section Scripts {
+    <script>
+        function confirmarEliminacion(event) {
+            event.preventDefault(); 
+            if (confirm("¿Confirmar la eliminación ?")) {
+                event.target.closest("form").submit(); 
+            }
         }
-    </tbody>
 
-
-
-
-</table>
+        document.addEventListener("DOMContentLoaded", function () {
+            const botonesEliminar = document.querySelectorAll(".eliminar-btn");
+            botonesEliminar.forEach(boton => boton.addEventListener("click", confirmarEliminacion));
+        });
+    </script>
+}

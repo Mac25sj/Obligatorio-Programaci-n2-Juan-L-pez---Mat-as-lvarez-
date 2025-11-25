@@ -19,6 +19,16 @@ public class Sistema
         }
     }
 
+
+    public List<Pago> Pagos
+    {
+        get
+        {
+            _pagos.Sort();
+            return _pagos;
+        }
+    }
+    
     public static Sistema Instancia
     {
         get
@@ -45,7 +55,6 @@ public class Sistema
             altaEquipo(nombre);
         }
     }
-
 
 
     private void precargaDeUsuarios()
@@ -93,11 +102,11 @@ public class Sistema
         altaPagoUnico(new Unico(hoy.AddDays(-60), 1009, TipoDePago.EFECTIVO, _gastos[3], 2350, _usuarios[9]));
         altaPagoUnico(new Unico(hoy.AddDays(-30), 1010, TipoDePago.CREDITO, _gastos[8], 2500, _usuarios[10]));
         altaPagoUnico(new Unico(hoy.AddDays(-30), 1011, TipoDePago.DEBITO, _gastos[13], 2650, _usuarios[11]));
-        altaPagoUnico(new Unico(hoy.AddDays(-65), 1012, TipoDePago.EFECTIVO, _gastos[14], 10300, _usuarios[1]));
-        altaPagoUnico(new Unico(hoy.AddDays(-64), 1013, TipoDePago.CREDITO, _gastos[15], 10450, _usuarios[2]));
-        altaPagoUnico(new Unico(hoy.AddDays(-63), 1014, TipoDePago.DEBITO, _gastos[16], 10600, _usuarios[3]));
-        altaPagoUnico(new Unico(hoy.AddDays(-62), 1015, TipoDePago.EFECTIVO, _gastos[17], 10750, _usuarios[4]));
-        altaPagoUnico(new Unico(hoy.AddDays(-61), 1016, TipoDePago.CREDITO, _gastos[18], 10900, _usuarios[5]));
+        altaPagoUnico(new Unico(hoy.AddDays(-25), 1012, TipoDePago.EFECTIVO, _gastos[14], 10300, _usuarios[1]));
+        altaPagoUnico(new Unico(hoy.AddDays(-4), 1013, TipoDePago.CREDITO, _gastos[15], 10450, _usuarios[2]));
+        altaPagoUnico(new Unico(hoy.AddDays(-13), 1014, TipoDePago.DEBITO, _gastos[16], 10600, _usuarios[3]));
+        altaPagoUnico(new Unico(hoy.AddDays(-22), 1015, TipoDePago.EFECTIVO, _gastos[17], 10750, _usuarios[4]));
+        altaPagoUnico(new Unico(hoy.AddDays(-21), 1016, TipoDePago.CREDITO, _gastos[18], 10900, _usuarios[5]));
         altaPagoRecurrente(new Recurrente(hoy.AddDays(-160), hoy.AddDays(-60), TipoDePago.EFECTIVO, _gastos[18], 2800, _usuarios[12]));
         altaPagoRecurrente(new Recurrente(hoy.AddDays(-145), hoy.AddDays(-56), TipoDePago.CREDITO, _gastos[4], 2950, _usuarios[13]));
         altaPagoRecurrente(new Recurrente(hoy.AddDays(-130), hoy.AddDays(-55), TipoDePago.DEBITO, _gastos[9], 3100, _usuarios[14]));
@@ -386,7 +395,7 @@ public class Sistema
     }
 
 
-    //Para empleado
+    //Empleado
 
     public void CargarPagos(Pago unPago)
     {
@@ -413,7 +422,6 @@ public class Sistema
     }
 
 
-    //Para gerente (todos los listados para equipo.con mes y año
 
     public List<Pago> ListarPagosPorFechayEquipo(Equipo unEquipo, DateTime fecha)
     {
@@ -508,6 +516,18 @@ foreach ( Usuario u in Usuarios)
             }
 
         }
+    }
+    public TipoDeGasto obtenerPagoPorNombre ( string Nombre)
+    {
+        foreach (TipoDeGasto p in _gastos)
+        {
+            if(p.Nombre == Nombre)
+            {
+                return p;
+            }
+        }
+        return null;
+
     }
 
 }

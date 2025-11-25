@@ -1,0 +1,92 @@
+﻿@using Dominio;
+@model List<TipoDeGasto>
+
+@{
+    ViewData["Title"] = "CargarUnPago";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Cargar un Pago</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form asp-action="CargarUnPago" method="post">
+                <div class="mb-3">
+                    <label for="Monto" class="form-label">Monto</label>
+                    <input type="number" id="Monto" name="Monto" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="NumeroDePago" class="form-label">Número de Pago</label>
+                    <input type="number" id="NumeroDePago" name="NumeroDePago" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="tipoPago" class="form-label">Tipo de Pago</label>
+                    <select id="tipoPago" name="tipoPago" class="form-select">
+                        <option value="CREDITO">Crédito</option>
+                        <option value="DEBITO">Débito</option>
+                        <option value="EFECTIVO">Efectivo</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="pagoSelect" class="form-label">Modalidad</label>
+                    <select id="pagoSelect" name="Pago" class="form-select">
+                        <option value="Recurrente">Recurrente</option>
+                        <option value="Unico">Único</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="tipoDeGasto" class="form-label">Tipo de Gasto</label>
+                    <select id="tipoDeGasto" name="tipoDeGasto" class="form-select">
+                        @foreach (TipoDeGasto tipo in Model)
+                        {
+                            <option value="@tipo.Nombre">@tipo.Nombre</option>
+                        }
+                    </select>
+                </div>
+
+                <div id="fechaUnica" class="mb-3" style="display:none;">
+                    <label for="fechaUnicaInput" class="form-label">Fecha</label>
+                    <input type="date" id="fechaUnicaInput" name="fechaUnica" class="form-control" />
+                </div>
+
+                <div id="fechasRecurrente" class="mb-3" style="display:none;">
+                    <label for="fechaInicio" class="form-label">Fecha inicio</label>
+                    <input type="date" id="fechaInicio" name="fechaInicio" class="form-control" />
+
+                    <label for="fechaFin" class="form-label mt-2">Fecha fin</label>
+                    <input type="date" id="fechaFin" name="fechaFin" class="form-control" />
+                </div>
+
+                <div class="d-grid">
+                    <input class="btn btn-primary" type="submit" value="Procesar Gasto" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const pagoSelect = document.querySelector("#pagoSelect");
+    const fechaUnica = document.querySelector("#fechaUnica");
+    const fechasRecurrente = document.querySelector("#fechasRecurrente");
+
+    function actualizarCampos() {
+        if (pagoSelect.value === "Unico") {
+            fechaUnica.style.display = "block";
+            fechasRecurrente.style.display = "none";
+        } else if (pagoSelect.value === "Recurrente") {
+            fechaUnica.style.display = "none";
+            fechasRecurrente.style.display = "block";
+        } else {
+            fechaUnica.style.display = "none";
+            fechasRecurrente.style.display = "none";
+        }
+    }
+
+    pagoSelect.addEventListener("change", actualizarCampos);
+    actualizarCampos();
+</script>

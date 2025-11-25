@@ -1,8 +1,9 @@
 ﻿using Dominio;
 using Dominio.Interfacez;
 using System;
+using System.Timers;
 
-public abstract class Pago:IValidar
+public abstract class Pago:IValidar, IComparable<Pago>
 {
     public int Id { get; set; }
     public TipoDePago FormaDePago { get; set; }
@@ -24,6 +25,24 @@ public Usuario NombreUsuario { get; set; }
         NombreUsuario = usuario;
         TipoGasto = unTipo;
     }
+    
+    public int CompareTo(Pago? other)
+    {
+        if(Monto<other.Monto)
+        {
+            return -1;
+        }
+        else if(Monto>other.Monto)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+
+    }
+
 
 
 
@@ -69,7 +88,6 @@ public Usuario NombreUsuario { get; set; }
     }
     public abstract bool EntreFecha(DateTime fecha);
     public abstract DateTime fechaDePago();
-    
 
-    
+  
 }
